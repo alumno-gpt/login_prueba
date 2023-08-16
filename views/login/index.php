@@ -4,13 +4,13 @@
         <div class="row mb-3">
             <div class="col">
                 <label for="usu_catologo" class="form-label">Catalogo</label>
-                <input type="number" class="form-control" id="usu_catalogo">
+                <input type="number" name="usu_catalogo" class="form-control" id="usu_catalogo">
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
                 <label for="usu_password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="usu_password">
+                <input type="password" name="usu_password" class="form-control" id="usu_password">
             </div>
         </div>
         <div class="d-grid">
@@ -18,6 +18,7 @@
         </div>
     </form>
     <div class="mt-3">
-        <p class="mb-0 text-center">NO tiene cuneta?<a href="/login_prueba/registro" class="text-primary fw-bold ms-2">Registrarse</a></p>
+        <p class="mb-0 text-center">No tiene cuneta?<a href="/login_prueba/registro" class="text-primary fw-bold ms-2">Registrarse</a></p>
     </div>
+    <script src="<?= asset('./build/js/login/index.js')?>"></script>
 </div>
