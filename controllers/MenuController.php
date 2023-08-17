@@ -26,3 +26,4 @@ class MenuController
         $router->render('menu/index', []);
     }
 }
+
