@@ -4,33 +4,33 @@ namespace Controllers;
 
 use MVC\Router;
 
-class MenuController {
+class MenuController
+{
 
-    public static function index(Router $router) {
+    public static function index(Router $router)
+    {
         $router->render('menu/index', []);
     }
 
-    public static function cerrarsesion() {
+    public static function cerrarsesion()
+    {
 
- 
-       $sesion= session_destroy();
+        $sesion = session_destroy();
 
+        echo json_encode($sesion);
+        exit;
 
-       echo json_encode($sesion);
-       exit;
-
-        if($session== true){
+        if ($session == true) {
 
             echo json_encode([
-                'codigo'=> '1'
+                'codigo' => '1'
             ]);
             exit;
-        }
-        else{
+        } else {
 
             echo json_encode([
 
-                'codigo'=>'2'
+                'codigo' => '2'
             ]);
             exit;
         }

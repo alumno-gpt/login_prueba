@@ -5,7 +5,7 @@ namespace Controllers;
 use Exception;
 use Model\Usuario;
 use MVC\Router;
-use Model\ActiveRecord; 
+use Model\ActiveRecord;
 
 class LoginController
 {

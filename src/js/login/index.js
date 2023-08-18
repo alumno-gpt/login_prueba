@@ -5,7 +5,7 @@ const login = async e => {
     if (!validarFormulario(formLogin)) {
         Toast.fire({
             icon: 'info',
-            title: 'Rellene todos los campos'
+            title: 'Llene todos los campos'
         })
         return;
     }
@@ -52,6 +52,5 @@ window.history.pushState(null, null, window.location.href);
 window.onpopstate = function(event) {
     window.history.go(1);
 };
-
 
 formLogin.addEventListener('submit', login);
