@@ -15,6 +15,7 @@ $router->get('/', [LoginController::class,'index']);
 $router->post('/API/login', [LoginController::class,'loginAPI']);
 
 $router->get('/menu', [MenuController::class,'index']);
+$router->get('/cerrarsesion', [MenuController::class,'cerrarsesion']);
 
 
 

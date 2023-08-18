@@ -1,17 +1,22 @@
-const botonCerrarSesion = document.getElementById('CerrarSesion');
+const botoncerrar = document.getElementById('cerrarsesion')
 
-const cerrarSesion = () => {
+const cerrarsesion = async () => {
     
+   const url = `/login_prueba/cerrarsesion`;
+    const config = {
+        method: 'GET'
+    };
 
-    window.location.href = '/login_prueba/'; // Redirigir a la pagina de inicio de sesión
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        if(data == true){
+
+            window.location.href= '/login_prueba/'
+        }        
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-if (botonCerrarSesion) {
-    botonCerrarSesion.addEventListener('click', cerrarSesion);
-}
-
-// Evitar que el usuario regrese a la pagina de inicio de sesion
-window.history.pushState(null, null, window.location.href);
-window.onpopstate = function(event) {
-    window.history.go(1);
-};
+botoncerrar.addEventListener('click', cerrarsesion)
