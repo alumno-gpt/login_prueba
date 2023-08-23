@@ -5,45 +5,52 @@ namespace Controllers;
 use Exception;
 use Model\Usuario;
 use MVC\Router;
-use Model\ActiveRecord;
 
-class LoginController
-{
-    public static function index(Router $router)
-    {
-        $router->render('login/index', []);
+class LoginController {
+    public static function index(Router $router){
+        if(!isset($_SESSION['auth_user'])){
+            $router->render('login/index', []);
+        }else{
+            header('Location: /login_prueba/menu');
+        }
     }
+    public static function menu(Router $router){
+        if(isset($_SESSION['auth_user'])){
+            $router->render('menu/index', []);
+        }else{
+            header('Location: /login_prueba/');
+        }
+    }
+    public static function loginAPI(){
 
-    public static function loginAPI()
-    {
         $catalogo = filter_var($_POST['usu_catalogo'], FILTER_SANITIZE_NUMBER_INT);
         $password = filter_var($_POST['usu_password'], FILTER_DEFAULT);
         $usuarioRegistrado = Usuario::fetchFirst("SELECT * from usuario where usu_catalogo = $catalogo");
 
-        try {
-            if (is_array($usuarioRegistrado)) {
+        try {      
+            if(is_array($usuarioRegistrado)){
                 $verificacion = password_verify($password, $usuarioRegistrado['usu_password']);
-                $nombre = $usuarioRegistrado["usu_nombre"];
-                if ($verificacion) {
+                $nombre = $usuarioRegistrado['usu_nombre'];
+                if($verificacion){
                     session_start();
                     $_SESSION['auth_user'] = $catalogo;
 
                     echo json_encode([
                         'codigo' => 1,
-                        'mensaje' => "Sesion iniciada correctamente. Bienvenido $nombre"
+                        'mensaje' => "Sesión iniciada correctamente. Bienvenido $nombre"
                     ]);
-                } else {
+                }else{
                     echo json_encode([
                         'codigo' => 2,
-                        'mensaje' => 'Contraseña Incorrecta'
+                        'mensaje' => 'Contraseña incorrecta'
                     ]);
                 }
-            } else {
+            }else{
                 echo json_encode([
                     'codigo' => 2,
-                    'mensaje' => 'usuario no encontrado'
-
+                    'mensaje' => 'Usuario no encontrado'
                 ]);
+    
             }
         } catch (Exception $e) {
             echo json_encode([
@@ -52,5 +59,15 @@ class LoginController
                 'mensaje' => 'Usuario no encontrado'
             ]);
         }
+
+
     }
+
+    public static function logout(){
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
+        header('Location: /login_prueba/');
+    }
+
 }
